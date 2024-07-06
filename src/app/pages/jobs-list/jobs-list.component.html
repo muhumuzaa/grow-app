@@ -1,0 +1,10 @@
+<div class="bg-gray-200 min-h-screen">
+<div class="md:max-w-7xl md:mx-auto mx-6 py-6 grid md:grid-cols-3 gap-4">
+    <div *ngFor="let job of jobs" class="shadow bg-white rounded p-6">
+        <h2 class="font-semibold text-xl">{{job.title}}</h2>
+        <h3 class="font-semibold py-4">{{job.company}}</h3>
+        <p class="mb-4">{{job.description}}</p>
+        <button [routerLink]="['/job-details', job.id]" class="bg-blue-400 hover:bg-blue-500 px-3 py-2 rounded text-white">View Job</button>
+    </div>
+</div>
+</div>
