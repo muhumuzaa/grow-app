@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fake_jobs, Job } from 'src/app/fake_jobs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { JobService } from 'src/app/services/job.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-job-contact',
@@ -10,19 +12,23 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class JobContactComponent implements OnInit {
 
-  job: Job | undefined;
+  job$: Observable<Job | undefined> | undefined;
   jobForm!: FormGroup;
 
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private service: JobService
   ) { }
 
   ngOnInit(): void {
     const jobId = this.route.snapshot.paramMap.get('id');
-    this.job = fake_jobs.find(job => job.id === jobId);
+    //this.job = fake_jobs.find(job => job.id === jobId);
+    if(jobId){
+      this.job$ = this.service.getJobById(jobId);
+    }
 
     this.jobForm = this.fb.group({
       fullName: ['',],
@@ -35,9 +41,6 @@ export class JobContactComponent implements OnInit {
   onSubmit(): void{
     alert("Your application was submited successfully");
     this.router.navigateByUrl('/jobs-list');
-
-  }
-
-  
+    }
 
 }

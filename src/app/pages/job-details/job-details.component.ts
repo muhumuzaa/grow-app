@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Job, fake_jobs } from 'src/app/fake_jobs';
 import { ActivatedRoute } from '@angular/router';
+import { JobService } from 'src/app/services/job.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,12 +12,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class JobDetailsComponent implements OnInit {
 
-  job: Job | undefined;
-  constructor( private route: ActivatedRoute) { }
+  job$:  Observable<Job | undefined> | undefined;
+  constructor( 
+    private route: ActivatedRoute,
+    private service: JobService
+  ) { }
 
   ngOnInit(): void {
     const jobId = this.route.snapshot.paramMap.get('id');
-    this.job = fake_jobs.find(job => job.id === jobId);
+    if(jobId){
+    this.job$ = this.service.getJobById(jobId);
+    }
   }
 
 }
