@@ -10,9 +10,10 @@ import { MyJobsComponent } from './pages/my-jobs/my-jobs.component';
 import { JobDetailsComponent } from './pages/job-details/job-details.component';
 import { JobContactComponent } from './pages/job-contact/job-contact.component';
 import { JobCardComponent } from './components/job-card/job-card.component';
-import { EditJobComponent } from './pages/edit-job/edit-job.component';
 import { CreateJobComponent } from './pages/create-job/create-job.component';
+import { EditJobComponent } from './pages/edit-job/edit-job.component';
 import { JobFormComponent } from './components/job-form/job-form.component';
+
 
 
 @NgModule({
@@ -24,9 +25,10 @@ import { JobFormComponent } from './components/job-form/job-form.component';
     JobDetailsComponent,
     JobContactComponent,
     JobCardComponent,
-    EditJobComponent,
     CreateJobComponent,
+    EditJobComponent,
     JobFormComponent
+
   ],
   imports: [
     BrowserModule,

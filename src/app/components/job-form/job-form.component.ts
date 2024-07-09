@@ -9,10 +9,10 @@ import { Job } from 'src/app/fake_jobs';
   styleUrls: ['./job-form.component.css']
 })
 export class JobFormComponent implements OnInit {
-
+ 
   jobForm!: FormGroup;
-  @Input() btnText: string ="";
 
+  @Input() btnText: string = '';
   @Input() jobData: Job | undefined;
 
   constructor(
@@ -22,22 +22,17 @@ export class JobFormComponent implements OnInit {
 
   ngOnInit() {
     this.jobForm = this.fb.group({
-      jobTitle: [ this.jobData?.title || '', Validators.required],
-      company: [this.jobData?.company || '', Validators.required],
+      jobTitle: [this.jobData?.title || '', Validators.required],
+      company: [ this.jobData?.company || '', Validators.required],
       description: [this.jobData?.description || '', Validators.required]
     })
   }
 
   onSubmit(): void{
+    console.log(this.jobForm)
     if(this.jobForm.valid){
-      if(this.jobData){
-        alert("You have successfully updated your Job..."); 
-      }
-      else{ alert("You have successfully created a new job.")
-
-      }
+      alert("Your job was created successfully");
       this.router.navigateByUrl("/my-jobs");
-      
     }else{
       this.jobForm.markAllAsTouched();
     }

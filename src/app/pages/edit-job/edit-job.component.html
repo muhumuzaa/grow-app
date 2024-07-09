@@ -1,11 +1,10 @@
-<div class="md:max-w-7xl md:mx-auto w-full mx-6">
-  <h2 class="text-2xl font-semibold text-center pt-6">Edit your job</h2>
-  <div *ngIf="job$ | async as job">
-  <app-job-form
 
+<div class="md:max-w-7xl md:mx-auto w-full mx-6">
+  <h2 class="text-2xl font-semibold text-center pt-6">Update your job</h2>
+  <app-job-form 
+  *ngIf="job$ | async as job"
     btnText="Update Job"
     [jobData]="job"
   ></app-job-form>
-</div>
 </div>
 
