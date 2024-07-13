@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Job } from 'src/app/fake_jobs';
 import { JobService } from 'src/app/services/job.service';
@@ -15,15 +15,20 @@ export class EditJobComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private service: JobService
   ) { }
 
   ngOnInit() {
     const jobId = this.route.snapshot.paramMap.get('id');
     if(jobId){
-      console.log(jobId)
-      this.job$ = this.service.getJobById(jobId);
+    this.job$ = this.service.getJobById(jobId);
     }
+  }
+
+  onUpdate(): void{
+    alert("Your job has been updated successfully!");
+    this.router.navigateByUrl("/my-jobs");
   }
 
 }

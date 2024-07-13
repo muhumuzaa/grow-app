@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Job } from 'src/app/fake_jobs';
@@ -14,6 +14,8 @@ export class JobFormComponent implements OnInit {
 
   @Input() btnText: string = '';
   @Input() jobData: Job | undefined;
+  @Output() onBtnClicked= new EventEmitter<Job>();
+  @Input() isUpdateMode: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -28,13 +30,25 @@ export class JobFormComponent implements OnInit {
     })
   }
 
-  onSubmit(): void{
-    console.log(this.jobForm)
-    if(this.jobForm.valid){
-      alert("Your job was created successfully");
-      this.router.navigateByUrl("/my-jobs");
-    }else{
-      this.jobForm.markAllAsTouched();
+  onSubmit(): void {
+    if (this.jobForm.valid) {
+      if (this.jobData?.id) {
+        const updatedJob: Job = {
+          id: this.jobData.id,
+          title: this.jobForm.value.jobTitle,
+          company: this.jobForm.value.company,
+          description: this.jobForm.value.description
+        };
+        this.onBtnClicked.emit(updatedJob);
+      } else {
+        const newJob: Omit<Job, 'id'> = {
+          
+          title: this.jobForm.value.jobTitle,
+          company: this.jobForm.value.company,
+          description: this.jobForm.value.description
+        };
+        this.onBtnClicked.emit(newJob as Job);
+    } 
     }
   }
 }

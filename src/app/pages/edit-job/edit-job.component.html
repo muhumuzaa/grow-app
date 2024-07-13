@@ -5,6 +5,6 @@
   *ngIf="job$ | async as job"
     btnText="Update Job"
     [jobData]="job"
+    (onBtnClicked)="onUpdate()"
   ></app-job-form>
 </div>
-

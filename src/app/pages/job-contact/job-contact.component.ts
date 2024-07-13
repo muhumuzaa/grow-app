@@ -26,6 +26,7 @@ export class JobContactComponent implements OnInit {
   ngOnInit(): void {
     const jobId = this.route.snapshot.paramMap.get('id');
     //this.job = fake_jobs.find(job => job.id === jobId);
+    console.log(jobId)
     if(jobId){
       this.job$ = this.service.getJobById(jobId);
     }

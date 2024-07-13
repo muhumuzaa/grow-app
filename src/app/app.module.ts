@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +17,7 @@ import { JobCardComponent } from './components/job-card/job-card.component';
 import { CreateJobComponent } from './pages/create-job/create-job.component';
 import { EditJobComponent } from './pages/edit-job/edit-job.component';
 import { JobFormComponent } from './components/job-form/job-form.component';
+
 
 
 
@@ -34,6 +39,8 @@ import { JobFormComponent } from './components/job-form/job-form.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
